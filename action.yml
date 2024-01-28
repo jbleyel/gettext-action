@@ -1,0 +1,15 @@
+name: 'Gettext Action'
+description: 'install gettext'
+runs:
+  using: "composite"
+  steps:
+    - name: install
+      run: |
+        sudo apt-get -q update
+        sudo apt-get install wget
+        mkdir -p gettext
+        wget -O ./gettext/gettext.tar.gz https://github.com/jbleyel/gettextbuild/raw/main/gettext.tar.gz
+        tar -xvf ./gettext/gettext.tar.gz -C ./gettext
+        sudo cp ./gettext/inst/lib/* /usr/lib
+        sudo cp ./gettext/inst/bin/* /usr/bin
+        sudo rm -rf ./gettext
